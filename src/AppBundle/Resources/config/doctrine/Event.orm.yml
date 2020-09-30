@@ -1,0 +1,32 @@
+AppBundle\Entity\Event:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\EventRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        path:
+            type: string
+            length: 255
+            nullable: true
+        title:
+            type: string
+            length: 255
+        content:
+            type: text
+        shortContent:
+            type: text
+            nullable: true
+            column: short_content
+        dataEvent:
+            type: datetime
+            nullable: true
+            column: data_event
+        likes:
+            type: integer
+            nullable: true
+    lifecycleCallbacks: {  }
