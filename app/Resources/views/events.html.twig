@@ -2,12 +2,30 @@
 {% block header %}
 <header>
     <div class="d-flex flex-column ">
-        <h1> Events</h1>
+        <h1 class="title-events"> Events</h1>
     </div>
 </header>
 {% endblock %}
 {% block body %}
     {% for event in events %}
-        <a href="#">{{ event.title }}</a><br><br>
+        <div class="container-events container">
+            <h2>{{  event.title }}</h2>
+            <div class="row">
+                <div class="picture-event">
+                    <img src="{{  event.path }}" alt="" style="width: 100px"/>
+                </div>
+                <div class="content-event">
+                    {{ event.shortContent }}
+                    <p>Continue reading... </p>
+                </div>
+            </div>
+                <p>---------------</p>
+                <p>Posted:</p>
+                <p>{{ event.dataEvent|date('Y-m-d') }}</p>
+            <i class="fa fa-heart-o add-like" aria-hidden="true" data-id="{{ event.id }}"></i>
+            <span class="like-count">{{ event.likes }}</span>
+            <br>
+            <br>
+        </div>
     {% endfor %}
 {% endblock %}

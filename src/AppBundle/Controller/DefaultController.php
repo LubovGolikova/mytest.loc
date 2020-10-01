@@ -18,7 +18,13 @@ class DefaultController extends Controller
 
         return new Response('<html><body>Admin page!</body></html>');
     }
-
+    /**
+     * @Route("/createevent")
+     */
+    public function newAction(Request $request)
+    {
+        return $this->render('createevent.html.twig');
+    }
     /**
      * @Route("/", name="homepage")
      */
