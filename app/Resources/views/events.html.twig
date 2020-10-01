@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
-1213214
 {% block header %}
 <header>
     <div class="d-flex flex-column ">
         <h1> Events</h1>
     </div>
 </header>
+{% endblock %}
+{% block body %}
+    {% for event in events %}
+        <a href="#">{{ event.title }}</a><br><br>
+    {% endfor %}
 {% endblock %}

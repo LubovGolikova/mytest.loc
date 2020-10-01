@@ -7,3 +7,6 @@ lucky:
 admin:
     path:    /admin
     defaults: { _controller: AppBundle:DefaultController}
+events:
+    path:    /events
+    defaults: { _controller: AppBundle:DefaultController::showAction}
