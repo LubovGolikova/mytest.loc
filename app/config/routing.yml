@@ -1,18 +1,3 @@
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
-lucky:
-    path:    /lucky
-    defaults: { _controller: AppBundle:LuckyController}
-admin:
-    path:    /admin
-    defaults: { _controller: AppBundle:DefaultController}
-events:
-    path:    /events
-    defaults: { _controller: AppBundle:DefaultController::showAction}
-createevent:
-    path:    /createevent
-    defaults: { _controller: AppBundle:DefaultController::newAction}
-addevent:
-    path:    /addevent
-    defaults: { _controller: AppBundle:DefaultController::addAction}

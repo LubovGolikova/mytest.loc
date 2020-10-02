@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Form\EventType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,7 +31,9 @@ class DefaultController extends Controller
      */
     public function addAction()
     {
-        return $this->render('new.html.twig',['form'=> $form->createView()]);
+        $event = new Event();
+        $form =$this->createForm(EventType::class, $event);
+        return $this->render('new.html.twig', ['form'=>$form->createView()]);
 
     }
     /**
@@ -48,12 +51,28 @@ class DefaultController extends Controller
      */
     public function showAction()
     {
-        $repository = $this->getDoctrine()->getRepository(Event::class);
+        $repository = $this->getDoctrine()
+            ->getRepository(Event::class);
 
-        $events = $repository->findAll();
+        $events = $repository
+            ->findAll();
 
         return $this->render('events.html.twig',[
             'events' => $events
+        ]);
+
+    }
+    /**
+     * @Route("/event/{id}", name="event_id")
+     */
+    public function showIdAction(Event $eventId)
+    {
+        $repository = $this->getDoctrine()->getRepository(Event::class);
+
+        $event = $repository->find($eventId);
+
+        return $this->render('event.html.twig',[
+            'event' => $event
         ]);
 
     }

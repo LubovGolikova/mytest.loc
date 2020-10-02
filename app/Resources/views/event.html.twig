@@ -2,24 +2,22 @@
 {% block header %}
     <header>
         <div class="d-flex flex-column ">
-            <h1 class="title-events"> All events </h1>
+            <h1 class="title-events"> Event </h1>
         </div>
     </header>
 {% endblock %}
 {% block body %}
-    {% for event in events %}
         <div id="containerId" class="container-events container">
-           <h2>{{  event.title }}</h2>
+            <h2>{{  event.title }}</h2>
             <div class="row">
                 <div class="picture-event">
                     <img src="{{  event.path }}" alt="" style="width: 100px"/>
                 </div>
                 <div class="content-event">
-                    {{ event.shortContent }}
-                    <a href="{{ path('event_id', {id: event.id}) }}"><p>Continue reading... </p></a>
+                    {{ event.content }}
                 </div>
             </div>
-                <p>---------------</p>
+            <p>---------------</p>
             <div class="row">
                 <p>Posted: </p>
                 <p>{{  event.dataEvent|date('Y-m-d') }}</p>
@@ -31,5 +29,4 @@
             <br>
             <br>
         </div>
-    {% endfor %}
 {% endblock %}
