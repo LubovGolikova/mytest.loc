@@ -20,11 +20,11 @@ $('#containerId').click(function(e){
     if(elem.hasClass('fa-heart-o')){
         $.ajax({
             method: 'GET',
-            url: '/verses/'+verseId+'/addLike',
+            url: '/events/'+eventId+'/addLike',
             success: function(data){
                 elem.next('.like-count').text(data);
                 elem.toggleClass('fa-heart-o fa-heart');
-                likesStorage.push(verseId);
+                likesStorage.push(eventId);
                 localStorage.setItem('likes', JSON.stringify(likesStorage))
             }
         })

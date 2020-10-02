@@ -26,11 +26,12 @@ class DefaultController extends Controller
         return $this->render('createevent.html.twig');
     }
     /**
-     * @Route("/addevent")
+     * @Route("/addevent", name="addevents")
      */
-    public function addAction(Request $request)
+    public function addAction()
     {
-        return $this->render('createevent.html.twig');
+        return $this->render('new.html.twig',['form'=> $form->createView()]);
+
     }
     /**
      * @Route("/", name="homepage")
