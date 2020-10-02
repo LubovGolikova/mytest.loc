@@ -29,10 +29,17 @@ class DefaultController extends Controller
     /**
      * @Route("/addevent", name="addevents")
      */
-    public function addAction()
+    public function addAction(Request $request)
     {
         $event = new Event();
         $form =$this->createForm(EventType::class, $event);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($event);
+            $em->flush();
+            return $this->redirect('events');
+        }
         return $this->render('new.html.twig', ['form'=>$form->createView()]);
 
     }
