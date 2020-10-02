@@ -11,3 +11,10 @@ h1{
 .button{
     margin-top: 20px;
 }
+.likes-views i{
+    font-size: 14px;
+    color:#333;
+    margin: 0px 2px 0px 0px;
+    padding: 0px 0px 0px 15px;
+
+}

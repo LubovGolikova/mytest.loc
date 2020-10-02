@@ -13,3 +13,6 @@ events:
 createevent:
     path:    /createevent
     defaults: { _controller: AppBundle:DefaultController::newAction}
+addevent:
+    path:    /addevent
+    defaults: { _controller: AppBundle:DefaultController::addAction}

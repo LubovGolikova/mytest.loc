@@ -8,22 +8,26 @@
 {% endblock %}
 {% block body %}
     {% for event in events %}
-        <div class="container-events container">
-            <h2>{{  event.title }}</h2>
+        <div id="containerId" class="container-events container">
+           <h2>{{  event.title }}</h2>
             <div class="row">
                 <div class="picture-event">
                     <img src="{{  event.path }}" alt="" style="width: 100px"/>
                 </div>
                 <div class="content-event">
                     {{ event.shortContent }}
-                    <p>Continue reading... </p>
+                    <a href="/event/{{ event.id }}"><p>Continue reading... </p></a>
                 </div>
             </div>
                 <p>---------------</p>
-                <p>Posted:</p>
-                <p>{{ event.dataEvent|date('Y-m-d') }}</p>
-            <i class="fa fa-heart-o add-like" aria-hidden="true" data-id="{{ event.id }}"></i>
-            <span class="like-count">{{ event.likes }}</span>
+            <div class="row">
+                <p>Posted: </p>
+                <p>{{  event.dataEvent|date('Y-m-d') }}</p>
+                <div class="likes-views">
+                    <i class="fa fa-heart-o add-like" aria-hidden="true" data-id="{{ event.id }}"></i>
+                    <span class="like-count">{{ event.likes }}</span>
+                </div>
+            </div>
             <br>
             <br>
         </div>
