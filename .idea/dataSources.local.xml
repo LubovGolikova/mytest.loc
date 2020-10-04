@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="symfony@localhost" uuid="3230b3d1-85de-4690-8135-0d13188425c9">
+      <secret-storage>memory</secret-storage>
+    </data-source>
+  </component>
+</project>
+

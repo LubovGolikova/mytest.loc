@@ -83,9 +83,35 @@ class DefaultController extends Controller
         ]);
 
     }
-
-
-
-
+    /**
+     * @Route("/event/{id}/addLike", name="event_id_addlike", methods={"POST"})
+     *
+     */
+    public function addLikeAction(Event $eventId)
+    {
+        $repository = $this->getDoctrine()->getRepository(Event::class);
+        $event = $repository->find($eventId);
+        $event->setLikes($event->getLikes()+1);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($event);
+        $em->flush();
+        //return new Response(json_encode(['1'=>$event->getLikes()]),  Response::HTTP_OK,
+           // ['content-type' => 'application/json']);
+        return new Response($event->getLikes(), Response::HTTP_CREATED);
 
 }
+
+}
+
+
+//get     likes  {}
+//post    likes    {liked_id, Entity}
+//delete  likes    liked_id, Entity
+
+
+//likes
+//------
+//id      qty     liked_id   Entity
+//1         2        12      Event
+//2         1        15      Event
+//3         1        5       New
