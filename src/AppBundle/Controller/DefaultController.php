@@ -101,4 +101,22 @@ class DefaultController extends Controller
 
     }
 
+
+    /**
+     * @Route("/event/{id}/deleteLike", name="event_id_deletelike", methods={"DELETE"})
+     *
+     */
+    public function deleteLikeAction(Event $eventId)
+    {
+        $repository = $this->getDoctrine()->getRepository(Event::class);
+        $event = $repository->find($eventId);
+        $event->setLikes($event->getLikes()-1);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($event);
+        $em->flush();
+
+        return new Response($event->getLikes(),Response::HTTP_CREATED);
+
+    }
+
 }

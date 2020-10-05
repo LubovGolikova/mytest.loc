@@ -17,6 +17,16 @@ $('.fa-heart-o').click(function(e){
                 $('.fa-heart-o').toggleClass('fa-heart-o fa-heart');
             }
         })
+    } else {
+        $.ajax({
+            method: 'DELETE',
+            url: path+'event/'+ eventId+'/deleteLike',
+            success: function(data){
+                $('.fa-heart').next('.like-count').text(data);
+                $('.fa-heart').toggleClass('fa-heart fa-heart-o');
+            }
+        })
     }
+
 });
 
