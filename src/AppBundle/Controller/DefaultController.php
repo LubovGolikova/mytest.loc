@@ -84,8 +84,21 @@ class DefaultController extends Controller
 
     }
 
+    /**
+     * @Route("/event/{id}/addLike", name="event_id_addlike", methods={"POST"})
+     *
+     */
+    public function addLikeAction(Event $eventId)
+    {
+        $repository = $this->getDoctrine()->getRepository(Event::class);
+        $event = $repository->find($eventId);
+        $event->setLikes($event->getLikes()+1);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($event);
+        $em->flush();
 
+        return new Response($event->getLikes(),Response::HTTP_CREATED);
 
-
+    }
 
 }

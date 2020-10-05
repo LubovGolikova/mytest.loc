@@ -27,7 +27,11 @@ class User implements UserInterface
      * @Assert\Email()
      */
     private $email;
-
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=254, unique=true)
+     */
+    private $username;
     /**
      * @var string
      * @ORM\Column(type="string", length=64)
@@ -152,62 +156,5 @@ class User implements UserInterface
         return $this;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
-    private $isActive;
-
-    public function __construct()
-    {
-        $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid('', true));
-    }
-
-
-
-
-
-
-
-
-
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize([
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
-        ]);
-    }
-
-    /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-            ) = unserialize($serialized, ['allowed_classes' => false]);
-    }
 }
 

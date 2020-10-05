@@ -5,27 +5,16 @@ $.ajaxSetup({
 });
 
 let eventId = $('.add-like').attr('data-id');
-//Likes
-let likesStorage = JSON.parse(localStorage.getItem('likes')) || [];
-console.log(likesStorage)
 
-if( likesStorage.indexOf( eventId ) >=0 ){
-    $('.add-like').toggleClass('fa-heart-o fa-heart');
-}
 
-$('#containerId').click(function(e){
-
-    let elem = $(e.target);
-
-    if(elem.hasClass('fa-heart-o')){
+$('.fa-heart-o').click(function(e){
+    if(!$(this).hasClass('fa-heart')) {
         $.ajax({
-            method: 'GET',
-            url: '/event/'+eventId+'/addLike',
+            method: 'POST',
+            url: path+'event/'+ eventId+'/addLike',
             success: function(data){
-                elem.next('.like-count').text(data);
-                elem.toggleClass('fa-heart-o fa-heart');
-                likesStorage.push(eventId);
-                localStorage.setItem('likes', JSON.stringify(likesStorage))
+                $('.fa-heart-o').next('.like-count').text(data);
+                $('.fa-heart-o').toggleClass('fa-heart-o fa-heart');
             }
         })
     }
