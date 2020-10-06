@@ -1,1 +1,25 @@
 {% extends 'base.html.twig' %}
+{% block header %}
+    <header>
+        <div class="d-flex flex-column ">
+            <h1 class="title-events"> Login</h1>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+
+{#<form action="{{ path('login') }}" method="post">#}
+
+    {#<input type="hidden" name="_csrf_token"#}
+           {#value="{{ csrf_token('authenticate') }}"#}
+    {#>#}
+    {#<label for="username">Username:</label>#}
+    {#<input type="text" id="username" name="_username" value="{{ last_username }}"/>#}
+
+    {#<label for="password">Password:</label>#}
+    {#<input type="password" id="password" name="_password"/>#}
+
+     {#<button type="submit">login</button>#}
+{#</form>#}
+{% endblock %}

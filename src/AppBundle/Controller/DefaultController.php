@@ -101,7 +101,6 @@ class DefaultController extends Controller
 
     }
 
-
     /**
      * @Route("/event/{id}/deleteLike", name="event_id_deletelike", methods={"DELETE"})
      *

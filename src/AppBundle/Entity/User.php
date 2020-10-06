@@ -7,11 +7,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="app_users")
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User implements UserInterface
 {
+
     const  ROLE_USER = 'ROLE_USER';
     /**
      * @var int
@@ -114,9 +115,12 @@ class User implements UserInterface
     public function getRoles()
     {
         $roles = $this->roles;
+
         if(empty($roles)) {
-            $roles[] = 'ROLE_USER';
+
+            $roles[] = self::ROLE_USER;
         }
+
         return array_unique($roles);
 
     }
