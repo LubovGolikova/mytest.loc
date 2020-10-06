@@ -33,7 +33,7 @@ class RegisterController extends Controller
             $em->flush();
             return $this->redirect('alluser');
             }
-            return $this->render('register.html.twig', ['form'=>$form->createView()]);
+            return $this->render('auth/register.html.twig', ['form'=>$form->createView()]);
     }
 
     /**
@@ -47,8 +47,10 @@ class RegisterController extends Controller
         $users = $repository
             ->findAll();
 
-        return $this->render('alluser.html.twig',[
+        return $this->render('admin/alluser.html.twig',[
             'users' => $users
         ]);
     }
+
+
 }
