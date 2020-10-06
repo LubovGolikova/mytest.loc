@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
+    const  ROLE_USER = 'ROLE_USER';
     /**
      * @var int
      * @ORM\Column(type="integer")
@@ -24,14 +25,17 @@ class User implements UserInterface
      * @var string
      * @ORM\Column(type="string", length=254, unique=true)
      * @Assert\NotBlank()
-     * @Assert\Email()
      */
-    private $email;
+    private $username;
+
     /**
      * @var string
      * @ORM\Column(type="string", length=254, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
-    private $username;
+    private $email;
+
     /**
      * @var string
      * @ORM\Column(type="string", length=64)
@@ -39,95 +43,11 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @var string
-     * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank()
-     */
-    private $plainPassword;
-
-    /**
      * @var array
      * @ORM\Column(type="json_array")
      */
     private $roles = [];
 
-    /**
-     * @return array
-     */
-    public function getRoles()
-    {
-        return [
-            'ROLE_USER'
-        ];
-    }
-
-    /**
-     * @params $roles
-     * @return $this
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @params  string $password
-     * @return User
-     */
-    public function setPassword(string $password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * @return null
-     */
-    public function getSalt()
-    {
-        return null;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->email;
-    }
-
-    public function eraseCredentials()
-    {
-        $this->plainPassword = null;
-    }
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @params  string $email
-     * @return  $this
-     */
-    public function setEmail(string $email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
 
     /**
      * @return int
@@ -140,20 +60,86 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getPlainPassword()
+    public function getUsername()
     {
-        return $this->plainPassword;
+        return $this->username;
     }
 
     /**
-     * @params  string $plainPassword
-     * @return  User
+     * @param string $username
      */
-    public function setPlainPassword(string $plainPassword)
+    public function setUsername($username)
     {
-        $this->plainPassword = $plainPassword;
+        $this->username = $username;
+    }
 
-        return $this;
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string  $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string  $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        $roles = $this->roles;
+        if(empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+        return array_unique($roles);
+
+    }
+
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
+    }
+
+    /**
+     * @return null
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+
+
+
+    public function eraseCredentials()
+    {
+
     }
 
 }

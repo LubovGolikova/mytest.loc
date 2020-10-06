@@ -32,7 +32,7 @@ class DefaultController extends Controller
     public function addAction(Request $request)
     {
         $event = new Event();
-        $form =$this->createForm(EventType::class, $event);
+        $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
