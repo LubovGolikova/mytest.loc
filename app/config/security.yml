@@ -31,10 +31,13 @@ security:
                 login_path: security_login
                 check_path: security_login
                 default_target_path: admin
+                csrf_token_generator: security.csrf.token_manager
+#                csrf_parameter: _csrf_security_token
+#                csrf_token_id: a_private_string
             logout:
                 path: security_logout
             provider: database_users
 
     access_control:
-        - { path: '^/admin', roles: IS_AUTHENTICATED_ANONYMOUSLY, ROLE_ADMIN }
+        - { path: '^/admin', roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: '^/login', roles: IS_AUTHENTICATED_ANONYMOUSLY }

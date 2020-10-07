@@ -31,21 +31,22 @@ class RegisterController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash("success", "Welcome to our application");
-
-            return $this->redirectToRoute("security_login");
-
+//
 //            $token = new UsernamePasswordToken(
 //                $user,
-//                $password,
+//                $hashed,
 //                'main',
 //                $user->getRoles()
 //            );
 //            $this->get('security.token_storage')->setToken($token);
+//            $this->get('session')->set('_security_main', serialize($token));
 
+
+            return $this->redirectToRoute("security_login");
 
             }
-            return $this->render('auth/register.html.twig', ['form'=>$form->createView()]);
+        return $this->render('auth/register.html.twig', ['form'=>$form->createView()]);
+
     }
 
 
