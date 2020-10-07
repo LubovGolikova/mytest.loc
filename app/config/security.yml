@@ -8,7 +8,9 @@ security:
 
     providers:
         database_users:
-            entity: { class: AppBundle:User, property: username }
+            entity:
+                class: AppBundle:User
+                property: username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -24,8 +26,12 @@ security:
             http_basic: ~
             # https://symfony.com/doc/current/security/form_login_setup.html
             form_login:
-                login_path: login
-                check_path: login
+                remember_me: true
+                login_path: security_login
+                check_path: security_login
+                default_target_path: alluser
+            logout:
+                path: security_logout
             provider: database_users
 
     access_control:

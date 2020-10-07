@@ -9,41 +9,47 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends Controller
 {
+
+//    /**
+//     * @Route("/login", name="login_get", methods={"GET"})
+//     */
+//    public function loginGetAction()
+//    {
+//        return new Response ('Get response work', 201);
+//
+//    }
+
     /**
      * @Route("/login", name="security_login")
      */
-//    public function loginAction(AuthenticationUtils $authenticationUtils)
-    public function loginAction()
+    public function loginAction(AuthenticationUtils $authenticationUtils)
     {
-        $helper = $this->get('security.authentication_utils');
 
-        return $this->render('auth/login.html.twig',[
-            'last_username' => $helper->getLastUsername(),
-            'error' => $helper->getLastAuthenticationError(),
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        return $this->render('auth/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error'         => $error,
         ]);
-
-
-
-
-
-//
-//        // get the login error if there is one
-//        $error = $authenticationUtils->getLastAuthenticationError();
-//
-//        // last username entered by the user
-//        $lastUsername = $authenticationUtils->getLastUsername();
-//
-//        return $this->render('auth/login.html.twig', [
-//            'last_username' => $lastUsername,
-//            'error'         => $error,
-//        ]);
     }
+
     /**
      * @Route("/logout", name="security_logout")
      */
     public function logoutAction()
     {
-//        throw new \Exception('This should never be reached!');
+         throw new \Exception('This should never be reached!');
     }
 
+    /**
+     * @Route("/confirm", name="confirm")
+     */
+    public function confirmAction()
+    {
+        return $this->render('auth/confirmation.html.twig');
+    }
 }
