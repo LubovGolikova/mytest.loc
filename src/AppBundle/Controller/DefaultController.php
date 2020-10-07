@@ -9,15 +9,24 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Event;
+use AppBundle\Form\UserType;
+use AppBundle\Entity\User;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/admin")
+     * @Route("/admin", name="admin")
      */
     public function adminAction()
     {
+        $repository = $this->getDoctrine()
+            ->getRepository(User::class);
 
-        return new Response('<html><body>Admin page!</body></html>');
+        $users = $repository
+            ->findAll();
+
+        return $this->render('admin/alluser.html.twig',[
+            'users' => $users
+        ]);
     }
     /**
      * @Route("/createevent")

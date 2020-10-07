@@ -2,7 +2,9 @@
 {% block header %}
     <header>
         <div class="d-flex flex-column ">
-            <h1 class="title-events"> Welcome, {{ user.username }}!</h1>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <h1 class="title-events"> Welcome, {{ app.user.username }}!</h1>
+            {% endif %}
         </div>
     </header>
 {% endblock %}

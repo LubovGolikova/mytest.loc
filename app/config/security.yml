@@ -26,14 +26,15 @@ security:
             http_basic: ~
             # https://symfony.com/doc/current/security/form_login_setup.html
             form_login:
-                remember_me: true
+#                remember_me:
+#                    token_provider: 'Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider'
                 login_path: security_login
                 check_path: security_login
-                default_target_path: alluser
+                default_target_path: admin
             logout:
                 path: security_logout
             provider: database_users
 
     access_control:
-        - { path: '^/admin', roles: ROLE_ADMIN }
+        - { path: '^/admin', roles: IS_AUTHENTICATED_ANONYMOUSLY, ROLE_ADMIN }
         - { path: '^/login', roles: IS_AUTHENTICATED_ANONYMOUSLY }

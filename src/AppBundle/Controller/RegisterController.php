@@ -48,21 +48,7 @@ class RegisterController extends Controller
             return $this->render('auth/register.html.twig', ['form'=>$form->createView()]);
     }
 
-    /**
-     * @Route("/alluser", name="alluser")
-     */
-    public function alluserAction(Request $request)
-    {
-        $repository = $this->getDoctrine()
-            ->getRepository(User::class);
 
-        $users = $repository
-            ->findAll();
-
-        return $this->render('admin/alluser.html.twig',[
-            'users' => $users
-        ]);
-    }
 
 
 }
