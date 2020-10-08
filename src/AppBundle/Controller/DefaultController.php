@@ -73,7 +73,7 @@ class DefaultController extends Controller
 
         $query = $repository->createQueryBuilder('p')
             ->select('p')
-            ->orderBy('p.dataEvent', 'DESC')
+            ->orderBy('p.id', 'DESC')
             ->getQuery();
 
         $events = $query->getResult();
@@ -81,16 +81,6 @@ class DefaultController extends Controller
         return $this->render('events.html.twig',[
             'events' => $events
         ]);
-
-//        $repository = $this->getDoctrine()
-//            ->getRepository(Event::class);
-//
-//        $events = $repository
-//            ->findAll();
-//
-//        return $this->render('events.html.twig',[
-//            'events' => $events
-//        ]);
 
     }
     /**
