@@ -50,6 +50,7 @@ class User implements UserInterface
     private $roles = [];
 
 
+
     /**
      * @return int
      */

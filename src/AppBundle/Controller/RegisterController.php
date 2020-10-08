@@ -31,7 +31,7 @@ class RegisterController extends Controller
             $em->persist($user);
             $em->flush();
 
-//
+
 //            $token = new UsernamePasswordToken(
 //                $user,
 //                $hashed,
