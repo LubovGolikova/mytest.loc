@@ -49,6 +49,10 @@ class User implements UserInterface
      */
     private $roles = [];
 
+    /**
+     * @ORM\Column(type="string", length=254, unique=true)
+     */
+    private $apiToken;
 
 
     /**
@@ -145,6 +149,14 @@ class User implements UserInterface
     public function eraseCredentials()
     {
 
+    }
+
+    /**
+     * @param string $apiToken
+     */
+    public function setApiToken($apiToken)
+    {
+        $this->apiToken = $apiToken;
     }
 
 }

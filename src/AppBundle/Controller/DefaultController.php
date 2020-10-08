@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Event;
 use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 class DefaultController extends Controller
 {
     /**
@@ -67,15 +68,29 @@ class DefaultController extends Controller
      */
     public function showAction()
     {
-        $repository = $this->getDoctrine()
-            ->getRepository(Event::class);
 
-        $events = $repository
-            ->findAll();
+        $repository = $this->getDoctrine()->getRepository(Event::class);
+
+        $query = $repository->createQueryBuilder('p')
+            ->select('p')
+            ->orderBy('p.dataEvent', 'DESC')
+            ->getQuery();
+
+        $events = $query->getResult();
 
         return $this->render('events.html.twig',[
             'events' => $events
         ]);
+
+//        $repository = $this->getDoctrine()
+//            ->getRepository(Event::class);
+//
+//        $events = $repository
+//            ->findAll();
+//
+//        return $this->render('events.html.twig',[
+//            'events' => $events
+//        ]);
 
     }
     /**

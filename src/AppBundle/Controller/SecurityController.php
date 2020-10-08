@@ -10,15 +10,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends Controller
 {
 
-//    /**
-//     * @Route("/login", name="login_get", methods={"GET"})
-//     */
-//    public function loginGetAction()
-//    {
-//        return new Response ('Get response work', 201);
-//
-//    }
-
     /**
      * @Route("/login", name="security_login")
      */
