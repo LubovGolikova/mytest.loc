@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d27e526143611551b073369b66b13dd",
+    "content-hash": "6b9e9bdf23ca736a32af0fad647a27df",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -2193,6 +2193,64 @@
             "time": "2018-07-31T09:26:32+00:00"
         },
         {
+            "name": "symfony-bundles/json-request-bundle",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony-bundles/json-request-bundle.git",
+                "reference": "7de00e6f28dc4a49da44e7562ce0163afd292a06"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony-bundles/json-request-bundle/zipball/7de00e6f28dc4a49da44e7562ce0163afd292a06",
+                "reference": "7de00e6f28dc4a49da44e7562ce0163afd292a06",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/annotations": "~1.1",
+                "php": ">=5.5.9",
+                "symfony/framework-bundle": "~2.7|~3.0"
+            },
+            "require-dev": {
+                "phpunit/php-code-coverage": "^2.2.0|^3.3.0|^4.0",
+                "phpunit/phpunit": "^4.8.0|^5.3",
+                "symfony/phpunit-bridge": "~2.7|~3.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SymfonyBundles\\JsonRequestBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Khaperets",
+                    "email": "khaperets@gmail.com"
+                }
+            ],
+            "description": "Symfony JsonRequest Bundle",
+            "homepage": "https://github.com/symfony-bundles/json-request-bundle",
+            "keywords": [
+                "angular",
+                "bundle",
+                "json",
+                "symfony"
+            ],
+            "time": "2017-10-17T06:52:00+00:00"
+        },
+        {
             "name": "symfony/monolog-bundle",
             "version": "v3.5.0",
             "source": {
@@ -3479,7 +3537,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5.9"
+        "php": ">=5.5.9",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

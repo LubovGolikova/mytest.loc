@@ -27,13 +27,16 @@ security:
             # https://symfony.com/doc/current/security/form_login_setup.html
             form_login:
 #                remember_me:
-#                    token_provider: 'Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider'
+#                     token_provider: 'Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider'
                 login_path: security_login
                 check_path: security_login
                 default_target_path: admin
                 csrf_token_generator: security.csrf.token_manager
-#                csrf_parameter: _csrf_security_token
-#                csrf_token_id: a_private_string
+            remember_me:
+                name: REMEMBERME
+                secret: "%secret%"
+                lifetime: 31536000
+
             logout:
                 path: security_logout
             provider: database_users

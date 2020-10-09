@@ -27,6 +27,16 @@ class RegisterController extends Controller
             $hashed = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hashed);
 
+            $token = new UsernamePasswordToken(
+                $user,
+                null,
+                'main',
+                $user->getRoles()
+            );
+            $this->get('security.token_storage')->setToken($token);
+            $user->setApiToken($token );
+
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();

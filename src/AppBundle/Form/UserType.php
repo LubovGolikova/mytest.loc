@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class UserType extends AbstractType
 {
     /**
@@ -19,7 +19,15 @@ class UserType extends AbstractType
         $builder
             ->add('username', TextType::class)
             ->add('email', EmailType::class)
-            ->add('password', PasswordType::class);
+            ->add('password', PasswordType::class)
+            ->add('roles', ChoiceType::class, array(
+            'multiple' => true,
+            'expanded' => true, // render check-boxes
+            'choices' => [
+                'Admin' => 'ROLE_ADMIN',
+                'User' => 'ROLE_USER',
+            ]
+        ));
 
 
     }/**
