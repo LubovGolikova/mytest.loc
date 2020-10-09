@@ -43,4 +43,7 @@ class SecurityController extends Controller
     {
         return $this->render('auth/confirmation.html.twig');
     }
+
+
+
 }

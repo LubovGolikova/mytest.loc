@@ -33,7 +33,7 @@ class DefaultController extends Controller
     /**
      * @Route("/createevent")
      */
-    public function newAction(Request $request)
+    public function newAction()
     {
         return $this->render('createevent.html.twig');
     }
