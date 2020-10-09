@@ -1,0 +1,16 @@
+AppBundle\Entity\TokenStorage:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\TokenStorageRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        token:
+            type: string
+            length: 255
+            unique: true
+    lifecycleCallbacks: {  }

@@ -21,6 +21,7 @@ class UserType extends AbstractType
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class);
 
+
     }/**
      * {@inheritdoc}
      */

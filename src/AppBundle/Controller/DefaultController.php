@@ -19,6 +19,7 @@ class DefaultController extends Controller
      */
     public function adminAction()
     {
+
         $repository = $this->getDoctrine()
             ->getRepository(User::class);
 
@@ -74,6 +75,8 @@ class DefaultController extends Controller
         $query = $repository->createQueryBuilder('p')
             ->select('p')
             ->orderBy('p.id', 'DESC')
+            ->setFirstResult(0)
+            ->setMaxResults(10)
             ->getQuery();
 
         $events = $query->getResult();

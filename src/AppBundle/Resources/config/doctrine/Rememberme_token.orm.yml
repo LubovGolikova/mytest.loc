@@ -1,0 +1,26 @@
+AppBundle\Entity\Rememberme_token:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\Rememberme_tokenRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        series:
+            type: string
+            length: '88'
+        value:
+            type: string
+            length: '88'
+        lastUsed:
+            type: time
+        class:
+            type: string
+            length: '100'
+        username:
+            type: string
+            length: '200'
+    lifecycleCallbacks: {  }

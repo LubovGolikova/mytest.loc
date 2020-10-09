@@ -31,17 +31,6 @@ class RegisterController extends Controller
             $em->persist($user);
             $em->flush();
 
-
-//            $token = new UsernamePasswordToken(
-//                $user,
-//                $hashed,
-//                'main',
-//                $user->getRoles()
-//            );
-//            $this->get('security.token_storage')->setToken($token);
-//            $this->get('session')->set('_security_main', serialize($token));
-
-
             return $this->redirectToRoute("security_login");
 
             }

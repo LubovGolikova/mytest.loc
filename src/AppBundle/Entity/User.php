@@ -1,10 +1,9 @@
 <?php
 
 namespace AppBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraint as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="user")
@@ -12,50 +11,41 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
-
-    const  ROLE_USER = 'ROLE_USER';
+    const ROLE_USER = 'ROLE_USER';
     /**
      * @var int
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=254, unique=true)
-     * @Assert\NotBlank()
      */
     private $username;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=254, unique=true)
-     * @Assert\NotBlank()
-     * @Assert\Email()
      */
     private $email;
 
     /**
-     * @var string
-     * @ORM\Column(type="string", length=64)
+     * @var array
      */
     private $password;
 
     /**
      * @var array
-     * @ORM\Column(type="json_array")
      */
-    private $roles = [];
+    private $roles;
 
     /**
-     * @ORM\Column(type="string", length=254, unique=true)
+     * @var string
      */
     private $apiToken;
 
 
     /**
+     * Get id
+     *
      * @return int
      */
     public function getId()
@@ -64,6 +54,22 @@ class User implements UserInterface
     }
 
     /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
      * @return string
      */
     public function getUsername()
@@ -72,14 +78,22 @@ class User implements UserInterface
     }
 
     /**
-     * @param string $username
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return User
      */
-    public function setUsername($username)
+    public function setEmail($email)
     {
-        $this->username = $username;
+        $this->email = $email;
+
+        return $this;
     }
 
     /**
+     * Get email
+     *
      * @return string
      */
     public function getEmail()
@@ -88,16 +102,23 @@ class User implements UserInterface
     }
 
     /**
-     * @param string  $email
+     * Set password
+     *
+     * @param array $password
+     *
+     * @return User
      */
-    public function setEmail($email)
+    public function setPassword($password)
     {
-        $this->email = $email;
+        $this->password = $password;
 
+        return $this;
     }
 
     /**
-     * @return string
+     * Get password
+     *
+     * @return array
      */
     public function getPassword()
     {
@@ -105,38 +126,59 @@ class User implements UserInterface
     }
 
     /**
-     * @param string  $password
+     * Set roles
+     *
+     * @param array $roles
+     *
+     * @return User
      */
-    public function setPassword($password)
+    public function setRoles($roles)
     {
-        $this->password = $password;
-
+        $this->roles = $roles;
+        return $this;
     }
 
-
     /**
+     * Get roles
+     *
      * @return array
      */
     public function getRoles()
     {
         $roles = $this->roles;
-
         if(empty($roles)) {
-
             $roles[] = self::ROLE_USER;
         }
-
         return array_unique($roles);
-
-    }
-
-    public function setRoles(array $roles)
-    {
-        $this->roles = $roles;
     }
 
     /**
-     * @return null
+     * Set apiToken
+     *
+     * @param string $apiToken
+     *
+     * @return User
+     */
+    public function setApiToken($apiToken)
+    {
+        $this->apiToken = $apiToken;
+
+        return $this;
+    }
+
+    /**
+     * Get apiToken
+     *
+     * @return string
+     */
+    public function getApiToken()
+    {
+        return $this->apiToken;
+    }
+
+    /**
+     *
+     * @return string|null The salt
      */
     public function getSalt()
     {
@@ -144,19 +186,9 @@ class User implements UserInterface
     }
 
 
-
-
     public function eraseCredentials()
     {
 
-    }
-
-    /**
-     * @param string $apiToken
-     */
-    public function setApiToken($apiToken)
-    {
-        $this->apiToken = $apiToken;
     }
 
 }

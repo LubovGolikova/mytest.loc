@@ -12,11 +12,17 @@ AppBundle\Entity\User:
         username:
             type: string
             length: 255
-        password:
-            type: string
-            length: 255
         email:
             type: string
             length: 255
+            unique: true
+        password:
+            type: json_array
+        roles:
+            type: array
+        apiToken:
+            type: string
+            length: 255
+            nullable: true
             unique: true
     lifecycleCallbacks: {  }
