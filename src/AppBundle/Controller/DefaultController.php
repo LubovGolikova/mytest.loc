@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Event;
 use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
+use Symfony\Component\HttpFoundation\File\File;
 class DefaultController extends Controller
 {
     /**
@@ -45,6 +46,16 @@ class DefaultController extends Controller
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $event->getPath();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('photo_directory'),
+                $fileName
+            );
+            $event->setPath($fileName);
+
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
             $em->flush();
