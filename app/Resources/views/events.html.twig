@@ -28,8 +28,17 @@
                     <span class="like-count">{{ event.likes }}</span>
                 </div>
             </div>
-            <br>
+            {% if is_granted('ROLE_ADMIN') %}
+
+                <div class="row">
+                    <form action="{{ path('event_id_update',{id: event.id}) }}" method="POST">
+                        <input type="hidden" name="_method" value="PUT" />
+                        <button class="btn  btn-primary button" type="submit" value="Update" >Update</button>
+                    </form>
+                </div>
+            {% endif %}
             <br>
         </div>
+
     {% endfor %}
 {% endblock %}

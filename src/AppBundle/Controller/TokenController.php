@@ -25,7 +25,8 @@ class TokenController extends Controller
      */
     public function postTokenPostAction(Request $request)
     {
-
+        $username = $request->get('username');
+        return new JsonResponse($username);
         $repository = $this->getDoctrine()->getRepository(User::class);
 
         $data = json_decode($request->getContent(), true);

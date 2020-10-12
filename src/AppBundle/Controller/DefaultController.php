@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Form\EventType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,12 +13,22 @@ use AppBundle\Entity\Event;
 use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 class DefaultController extends Controller
 {
     /**
      * @Route("/admin", name="admin")
      */
     public function adminAction()
+    {
+
+        return $this->render('admin/profile.html.twig');
+    }
+    /**
+     * @Route("/alluser", name="alluser")
+     */
+    public function alluserAction()
     {
 
         $repository = $this->getDoctrine()
@@ -30,15 +41,9 @@ class DefaultController extends Controller
             'users' => $users
         ]);
     }
+
     /**
-     * @Route("/createevent")
-     */
-    public function newAction()
-    {
-        return $this->render('createevent.html.twig');
-    }
-    /**
-     * @Route("/addevent", name="addevents")
+     * @Route("/addevent", name="addevent")
      */
     public function addAction(Request $request)
     {
@@ -48,12 +53,8 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $file = $event->getPath();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move(
-                $this->getParameter('photo_directory'),
-                $fileName
-            );
-            $event->setPath($fileName);
+
+            $event->setPath($this->upload($file));
 
 
             $em = $this->getDoctrine()->getManager();
@@ -64,6 +65,8 @@ class DefaultController extends Controller
         return $this->render('new.html.twig', ['form'=>$form->createView()]);
 
     }
+
+
     /**
      * @Route("/", name="homepage")
      */
@@ -75,7 +78,7 @@ class DefaultController extends Controller
         ]);
     }
     /**
-     * @Route("/events")
+     * @Route("/events", name="events")
      */
     public function showAction()
     {
@@ -97,7 +100,7 @@ class DefaultController extends Controller
 
     }
     /**
-     * @Route("/event/{id}", name="event_id")
+     * @Route("/event/{id}", name="event_id", methods={"GET"})
      */
     public function showIdAction(Event $eventId)
     {
@@ -111,6 +114,42 @@ class DefaultController extends Controller
         ]);
 
     }
+    /**
+     * @Route("/events/{id}/update", name="event_id_update" , methods={"GET","POST","PUT"})
+     */
+    public function updateAction(Request $request, Event $eventId)
+    {
+
+        $repository = $this->getDoctrine()->getRepository(Event::class);
+
+        $event = $repository->find($eventId);
+
+        $editForm = $this->createForm(EventType::class, $event);
+        $editForm->handleRequest($request);
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            new File($event->getPath());
+            $file=$event->getPath();
+
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('photo_directory'),
+                $fileName
+            );
+
+            $event->setPath($fileName );
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            return $this->redirectToRoute('homepage');
+        }
+        return $this->render('edit.html.twig', array(
+            'event' => $event,
+            'edit_form' => $editForm->createView(),
+        ));
+
+    }
+
 
     /**
      * @Route("/event/{id}/addLike", name="event_id_addlike", methods={"POST"})
@@ -144,6 +183,15 @@ class DefaultController extends Controller
 
         return new Response($event->getLikes(),Response::HTTP_CREATED);
 
+    }
+    public function upload(UploadedFile $file)
+    {
+        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+        $file->move(
+            $this->getParameter('photo_directory'),
+            $fileName
+        );
+        return $fileName;
     }
 
 }

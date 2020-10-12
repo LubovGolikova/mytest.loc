@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+    <header>
+        <div class="d-flex flex-column ">
+            {% if is_granted('ROLE_ADMIN') %}
+                <h1 class="title-events"> Welcome, {{ app.user.username }}!</h1>
+            {% endif %}
+        </div>
+    </header>
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="profile-content">
+            <a href="{{ path('alluser') }}"><p> All users</p></a>
+            <a href="{{ path('events') }}"><p> All events</p></a>
+            <a href="{{ path('addevent') }}"><p> Add event</p></a>
+
+        </div>
+    </div>
+
+{% endblock %}
