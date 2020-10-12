@@ -5,7 +5,8 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 class EventType extends AbstractType
 {
     /**
@@ -14,10 +15,10 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('path')
-            ->add('title')
-            ->add('content')
-            ->add('shortContent')
+            ->add('path', FileType::class)
+            ->add('title', TextType::class)
+            ->add('content', TextType::class)
+            ->add('shortContent', TextType::class)
             ->add('dataEvent')
             ->add('likes');
     }/**

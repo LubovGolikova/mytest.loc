@@ -28,25 +28,20 @@ class TokenController extends Controller
 
         $repository = $this->getDoctrine()->getRepository(User::class);
 
-
         $data = json_decode($request->getContent(), true);
 
+        $apiToken= isset($data['apiToken']) ? $data['apiToken'] : null;
 
-//        $username = $request->get('username');
-       $username= isset($data['username']) ? $data['username'] : null;
-//        $password = isset($data['password']) ? $data['password'] : null;
+        $query = $repository->createQueryBuilder('p')
+            ->select('p.id')
+            ->where('p.apiToken= :Token')
+            ->setParameter('Token', $apiToken)
+            ->getQuery();
 
-//            $user_db=$repository->find($username);
-//
-//
-//            $username_db = $user_db->getUsername();
-//            $password_db = $user_db->getPassword();
-//            if($username == $username_db) {
-//                return new JsonResponse(['message'=>'POST response work!']);
-//            }
+        $users = $query->getResult();
+        $result = $users ? 'user exists!' : 'user does not exist!';
 
-
-        return new JsonResponse(['result' => 'ok', 'ret' => ['username' => $username]]);
+        return new JsonResponse(['message'=> $result]);
 
     }
 
