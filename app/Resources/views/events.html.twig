@@ -12,7 +12,7 @@
            <h2>{{  event.title }}</h2>
             <div class="row">
                 <div class="picture-event">
-                    <img src="{{  event.path }}" alt="" style="width: 100px"/>
+                    <img src="{{ asset('assets/photo/' ~ event.path) }}" alt="" style="width: 100px"/>
                 </div>
                 <div class="content-event">
                     {{ event.shortContent }}
