@@ -29,4 +29,12 @@ AppBundle\Entity\Event:
         likes:
             type: integer
             nullable: true
-    lifecycleCallbacks: {  }
+        created:
+            type: datetime
+            nullable: true
+        updated:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks:
+        prePersist: [onPrePersist]
+        preUpdate: [onPreUpdate]
