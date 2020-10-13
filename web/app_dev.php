@@ -1,4 +1,5 @@
 <?php
+//phpinfo();
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 

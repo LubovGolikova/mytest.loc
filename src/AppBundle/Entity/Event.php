@@ -1,9 +1,14 @@
 <?php
 
 namespace AppBundle\Entity;
-
+use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use DateTimeInterface;
+use Exception;
 /**
- * Event
+ * @ORM\Table(name="event")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EventRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Event
 {
@@ -41,6 +46,21 @@ class Event
      * @var int
      */
     private $likes;
+
+    /**
+     * @var \Datetime $created
+     *
+     * @ORM\Column(type="datetime")
+     */
+    protected $created;
+
+    /**
+     * @var \Datetime $updated
+     *
+     * @ORM\Column(type="datetime", nullable = true)
+     */
+    protected $updated;
+
 
 
     /**
@@ -196,5 +216,26 @@ class Event
     {
         return $this->likes;
     }
+
+    /**
+     * Gets triggered only on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created = new \DateTime("now");
+    }
+
+    /**
+     * Gets triggered every time on update
+
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updated = new \DateTime("now");
+    }
+
 }
 

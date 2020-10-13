@@ -1,1 +1,0 @@
-INSERT INTO symfony.token_storage (id, token) VALUES (1, '1');

@@ -11,7 +11,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
-    const ROLE_USER = 'ROLE_USER';
     /**
      * @var int
      */
@@ -150,7 +149,7 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         if(empty($roles)) {
-            $roles[] = self::ROLE_USER;
+            $roles[] = 'ROLE_USER';
         }
         return array_unique($roles);
     }
