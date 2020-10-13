@@ -23,6 +23,7 @@
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^5.0.0",
         "symfony-bundles/json-request-bundle": "v2.0.1",
+        "symfony/http-foundation": "^3.4",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
         "symfony/serializer": "^3.4",
