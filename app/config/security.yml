@@ -20,6 +20,8 @@ security:
 
         main:
             anonymous: ~
+            json_login:
+                check_path: login_token
             # activate different ways to authenticate
             logout_on_user_change: true
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
@@ -34,10 +36,10 @@ security:
                 name: REMEMBERME
                 secret: "%secret%"
                 lifetime: 31536000
-
             logout:
                 path: security_logout
             provider: database_users
+
 
     access_control:
         - { path: '^/admin', roles: ROLE_ADMIN }

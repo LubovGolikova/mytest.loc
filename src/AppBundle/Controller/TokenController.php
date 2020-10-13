@@ -21,6 +21,20 @@ class TokenController extends Controller
 
 
     /**
+     * @Route("/logintoken", name="login_token", methods={"POST"})
+     */
+    public function loginTokenPostAction(Request $request)
+    {
+//        $username = $request->get('username');
+//        return new JsonResponse($username);
+        $user = $this->getUser();
+        return $this->json([
+            'username' => $user->getUsername(),
+            'roles' => $user->getRoles()
+        ]);
+
+    }
+    /**
      * @Route("/tokens", name="tokens_post", methods={"POST"})
      */
     public function postTokenPostAction(Request $request)
@@ -45,6 +59,5 @@ class TokenController extends Controller
         return new JsonResponse(['message'=> $result]);
 
     }
-
 
 }

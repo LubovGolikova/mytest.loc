@@ -59,8 +59,6 @@ class Event
      */
     private $updated;
 
-
-
     /**
      * Get id
      *
