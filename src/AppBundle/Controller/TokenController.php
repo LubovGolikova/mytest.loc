@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use AppBundle\Entity\User;
 class TokenController extends Controller
 {
@@ -23,34 +24,35 @@ class TokenController extends Controller
     /**
      * @Route("/logintoken", name="login_token", methods={"POST"})
      */
-    public function loginTokenPostAction(Request $request)
+    public function loginTokenPostAction(Request $request, JWTTokenManagerInterface $JWTManager)
     {
 //        $username = $request->get('username');
 //        return new JsonResponse($username);
         $user = $this->getUser();
-        return $this->json([
-            'username' => $user->getUsername(),
-            'roles' => $user->getRoles()
-        ]);
-
+//        $token = $JWTManager->create($user);
+        $token= $request->get('username');
+        return new JsonResponse($token);
+////        return $this->json([
+////            'username' => $user->getUsername(),
+////            'roles' => $user->getRoles()
+////        ]);
+///
+//        $token = JWT:encode($user, $key);
+//
     }
     /**
-     * @Route("/tokens", name="tokens_post", methods={"POST"})
+     * @Route("/usertokens", name="user_tokens", methods={"POST"})
      */
-    public function postTokenPostAction(Request $request)
+    public function userTokenAction(Request $request)
     {
-        $username = $request->get('username');
-        return new JsonResponse($username);
+
         $repository = $this->getDoctrine()->getRepository(User::class);
-
-        $data = json_decode($request->getContent(), true);
-
-        $apiToken= isset($data['apiToken']) ? $data['apiToken'] : null;
+        $username = $request->get('username');
 
         $query = $repository->createQueryBuilder('p')
             ->select('p.id')
-            ->where('p.apiToken= :Token')
-            ->setParameter('Token', $apiToken)
+            ->where('p.username= :Username')
+            ->setParameter('Username', $username)
             ->getQuery();
 
         $users = $query->getResult();
@@ -59,5 +61,30 @@ class TokenController extends Controller
         return new JsonResponse(['message'=> $result]);
 
     }
+/**
+ * @Route("/tokens", name="tokens_post", methods={"POST"})
+ */
+public function postTokenPostAction(Request $request)
+{
+//        $username = $request->get('username');
+//        return new JsonResponse($username);
+    $repository = $this->getDoctrine()->getRepository(User::class);
+
+    $data = json_decode($request->getContent(), true);
+
+    $apiToken= isset($data['apiToken']) ? $data['apiToken'] : null;
+
+    $query = $repository->createQueryBuilder('p')
+        ->select('p.id')
+        ->where('p.apiToken= :Token')
+        ->setParameter('Token', $apiToken)
+        ->getQuery();
+
+    $users = $query->getResult();
+    $result = $users ? 'user exists!' : 'user does not exist!';
+
+    return new JsonResponse(['message'=> $result]);
+
+}
 
 }
