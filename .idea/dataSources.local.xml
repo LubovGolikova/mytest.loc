@@ -2,10 +2,9 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="symfony@localhost" uuid="3230b3d1-85de-4690-8135-0d13188425c9">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <introspection-schemas>*:@</introspection-schemas>
     </data-source>
   </component>
 </project>
+
