@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Event\RegisteredUserEvent;
 use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,7 +18,7 @@ class RegisterController extends Controller
     /**
      * @Route("/register", name="register")
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $encoder)
+    public function registerAction(Request $request, UserPasswordEncoderInterface $encoder, EventDispatcherInterface $eventDispatcher)
     {
 
         $user = new User();
@@ -40,6 +42,8 @@ class RegisterController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            $userRegisteredEvent = new RegisteredUserEvent($user);
+            $eventDispatcher->dispatch(RegisteredUserEvent::NAME, $userRegisteredEvent);
 
             return $this->redirectToRoute('events');
 

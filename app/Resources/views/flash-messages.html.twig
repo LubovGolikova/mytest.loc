@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+<header>
+    <div class="d-flex flex-column ">
+        <h1 class="title-events"> All flash</h1>
+    </div>
+</header>
+{% endblock %}
+{% block body %}
+{% block flash_messages %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                {{ message | raw }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+{% endblock %}
