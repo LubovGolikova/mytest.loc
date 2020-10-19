@@ -29,16 +29,9 @@ class TokenController extends Controller
 //        $username = $request->get('username');
 //        return new JsonResponse($username);
         $user = $this->getUser();
-//        $token = $JWTManager->create($user);
         $token= $request->get('username');
         return new JsonResponse($token);
-////        return $this->json([
-////            'username' => $user->getUsername(),
-////            'roles' => $user->getRoles()
-////        ]);
-///
-//        $token = JWT:encode($user, $key);
-//
+
     }
     /**
      * @Route("/usertokens", name="user_tokens", methods={"POST"})
@@ -47,7 +40,6 @@ class TokenController extends Controller
     {
 
         $repository = $this->getDoctrine()->getRepository(User::class);
-//        $username = $request->get('username');
         $data = json_decode($request->getContent(), true);
 
         $username = isset($data['username']) ? $data['username'] : null;
@@ -83,8 +75,6 @@ class TokenController extends Controller
  */
 public function postTokenPostAction(Request $request)
 {
-//        $username = $request->get('username');
-//        return new JsonResponse($username);
     $repository = $this->getDoctrine()->getRepository(User::class);
 
     $data = json_decode($request->getContent(), true);
