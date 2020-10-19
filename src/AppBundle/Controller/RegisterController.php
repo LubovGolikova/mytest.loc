@@ -41,7 +41,7 @@ class RegisterController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute("security_login");
+            return $this->redirectToRoute('events');
 
             }
         return $this->render('auth/register.html.twig', ['form'=>$form->createView()]);
