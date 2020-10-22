@@ -7,7 +7,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-//use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use AppBundle\Entity\User;
 class TokenController extends Controller
 {
@@ -26,11 +25,8 @@ class TokenController extends Controller
      */
     public function loginTokenPostAction(Request $request)
     {
-//        $username = $request->get('username');
-//        return new JsonResponse($username);
-        $user = $this->getUser();
-        $token= $request->get('username');
-        return new JsonResponse($token);
+        $username = $request->get('username');
+        return new JsonResponse($username);
 
     }
     /**

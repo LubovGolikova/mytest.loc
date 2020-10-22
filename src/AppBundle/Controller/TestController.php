@@ -14,7 +14,7 @@ class TestController extends Controller
     }
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/test", name="test", methods={"GET"})
      */
     public function testAction(EventDispatcherInterface $dispatcher)
     {

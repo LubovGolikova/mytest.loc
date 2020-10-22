@@ -21,7 +21,7 @@
         "doctrine/orm": "^2.5",
         "firebase/php-jwt": "^5.2",
         "incenteev/composer-parameter-handler": "^2.0",
-        "lexik/jwt-authentication-bundle": "^2.8",
+        "lexik/jwt-authentication-bundle": "v2.5.1",
         "rackspace/php-opencloud": "dev-master",
         "sensio/framework-extra-bundle": "^5.0.0",
         "symfony-bundles/json-request-bundle": "v2.0.1",

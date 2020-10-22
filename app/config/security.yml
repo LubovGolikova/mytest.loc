@@ -19,10 +19,12 @@ security:
             security: false
 
         main:
-            anonymous: ~
+            anonymous: true
+            stateless: true
             json_login:
-                check_path: login_token
-
+                check_path: auth_post
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler:  lexik_jwt_authentication.handler.authentication_failure
             # activate different ways to authenticate
             logout_on_user_change: true
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
@@ -40,9 +42,10 @@ security:
             logout:
                 path: security_logout
             provider: database_users
-
-
-
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
     access_control:
         - { path: '^/admin', roles: ROLE_ADMIN }
         - { path: '^/login', roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: '^/auth', roles: IS_AUTHENTICATED_FULLY }
