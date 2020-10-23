@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\User;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 class TokenController extends Controller
 {
 
@@ -62,7 +63,11 @@ class TokenController extends Controller
      */
     public function checkTokenPostAction(Request $request)
     {
+
+        $targetPath = $this->getTargetPath($request->getSession(),'main');
+
         $result =  $request->getSession()->get('token') == $request->headers->get('authorization') ? 'user exists!' : 'user does not exist!';
+
         return new JsonResponse(['message'=> $result]);
     }
 

@@ -27,7 +27,6 @@ class AuthLoginController extends Controller
      * @param JWTTokenManagerInterface $JWTManager
      * @param Request $request
      * @return JsonResponse
-
      */
     public function authpostAction(Request $request, JWTTokenManagerInterface $JWTManager)
     {
