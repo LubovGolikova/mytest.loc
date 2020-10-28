@@ -20,6 +20,7 @@
         "doctrine/doctrine-migrations-bundle": "^1.3",
         "doctrine/orm": "^2.5",
         "firebase/php-jwt": "^5.2",
+        "gos/web-socket-bundle": "v2.x",
         "incenteev/composer-parameter-handler": "^2.0",
         "lexik/jwt-authentication-bundle": "v2.5.1",
         "rackspace/php-opencloud": "dev-master",
