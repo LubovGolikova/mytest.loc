@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\User;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+
 class TokenController extends Controller
 {
 

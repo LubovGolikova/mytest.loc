@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+    <header>
+        <div class="d-flex flex-column ">
+            {#{% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+                <h1 class="title-events"> Welcome, {{ app.user.username }}!</h1>
+            {#{% endif %}#}
+        </div>
+    </header>
+{% endblock %}
+{% block body %}
+
+
+<a href="#open-block" class="center-screen link-open-block">Go to chat with virtual helper</a>
+
+    <div id="open-block">
+        <div class="open-block-inner">
+            <div class="open-block-text">
+                <div class="container">
+                    <h1>Hi,  {{ app.user.username }}!</h1>
+                    <h2>Can I help you?</h2>
+                    <div class="form-group">
+                        <input type="text" id="inp" class="form-control input-lg" placeholder="Message..." />
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-lg btn-success" type="button" id="btn">Send!</button>
+                    </div>
+
+                </div>
+                <a href="#" class="open-block-close" title="close">x</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
