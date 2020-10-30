@@ -14,5 +14,12 @@ class ChatControllerController extends Controller
     {
         return $this->render('chat/chat.html.twig');
     }
+    /**
+     * @Route("/chatadmin", name="chatadmin")
+     */
+    public function adminchatAction()
+    {
+        return $this->render('chat/admin-chat.html.twig');
+    }
 
 }

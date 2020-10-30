@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+   {% block header %}
+   {% endblock %}
+{% block body %}
+    <div class="container">
+
+        <div class="tab">
+            <button class="tablinks" onclick="openNav(event, 'Users')" id="defaultOpen">Users</button>
+            <button class="tablinks" onclick="openNav(event, 'Performer')">Performer</button>
+            <button class="tablinks" onclick="openNav(event, 'Status')">Status</button>
+            <button class="tablinks" onclick="openNav(event, 'Statistics')">Statistics</button>
+        </div>
+
+        <div id="Users" class="tabcontent">
+            <div class = "title-chat">
+                <h3>Users</h3>
+            </div>
+        <div class="tab-wrap">
+            <table class = "table" id="myTable">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User</th>
+                    <th>On the site</th>
+                    <th>Status</th>
+                    <th>Performer</th>
+                    <th>Chat</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1.</td>
+                    <td>user</td>
+                    <td>on the site</td>
+                    <td>new</td>
+                    <td>admin</td>
+                    <td>
+                        <button id="btn-admin-chat" class="btn btn-lg btn-success"  type="button">Chat</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+
+        <div id="Performer" class="tabcontent">
+            <h3>Performer</h3>
+        </div>
+
+        <div id="Status" class="tabcontent">
+            <h3>Status</h3>
+        </div>
+
+        <div id="Statistic" class="tabcontent">
+            <h3>Statistic</h3>
+        </div>
+
+    </div>
+
+<div id="myPopup" class="wrap">
+    <div class="popup">
+        <p>We are here!</p>
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+</div>
+
+{% endblock %}
