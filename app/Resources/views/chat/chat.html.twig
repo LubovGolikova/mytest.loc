@@ -2,9 +2,7 @@
 {% block header %}
     <header>
         <div class="d-flex flex-column ">
-            {#{% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
                 <h1 class="title-events"> Welcome, {{ app.user.username }}!</h1>
-            {#{% endif %}#}
         </div>
     </header>
 {% endblock %}
@@ -27,6 +25,7 @@
                     <div class="col">
                         <form id="messForm">
                             <div class="form-group">
+
                                 <input id="inp" type="text" class="form-control input-lg" placeholder="Message..." />
                             </div>
                             <div class="form-group">
@@ -43,29 +42,29 @@
                             let $form = $("#messForm");
                             let $inp = $("#inp");
                             let $all_messages = $("#all_mess");
+                            let $user_name = "{{ app.user.username}}";
+
 
                             $form.submit(function(event){
                                 event.preventDefault();
-                                socket.emit('send mess',{mess:$inp.val()});
+                                socket.emit('send mess',{mess:$inp.val(), user:$user_name});
                                 $inp.val('');
                             });
 
 
                             socket.on('add mess', function (msg) {
-                                $all_messages.append(msg.mess+"<br>");
+                                console.log($user_name);
+                                console.log(msg.user+"chat!!");
+                                $all_messages.append(  msg.user + ":" + msg.mess + "<br>");
 
                             });
+
                             socket.emit('add mess', 'Hello World from client!!!!');
+                            socket.emit('new user',$user_name)
 
                         });
 
-                        // var socket = io("http://localhost:3000");
-                        // socket.on("message-from-server-to-client", function(msg) {
-                        //     document.getElementById('message').innerHTML = msg;
-                        // });
-                        // socket.emit('message-from-client-to-server', 'Hello World!!!!');
-
-                    </script>
+                       </script>
                     <p>Socker.io Hello World client started!</p>
                 </div>
                 <a href="#" class="open-block-close" title="close">x</a>
@@ -74,16 +73,3 @@
     </div>
 
 {% endblock %}
-  {#{% block javascripts %}#}
-      {#<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>#}
-      {#<script>#}
-          {#var socket = io("http://localhost:3000");#}
-          {#socket.on("message-from-server-to-client", function(msg) {#}
-              {#document.getElementById('message').innerHTML = msg;#}
-          {#});#}
-          {#socket.emit('message-from-client-to-server', 'Hello World!!!!');#}
-      {#</script>#}
-      {#<p>Socker.io Hello World client started!</p>#}
-      {#<p id="message"></p>#}
-
-  {#{% endblock %}#}

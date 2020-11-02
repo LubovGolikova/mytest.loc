@@ -35,7 +35,8 @@
                     <td>new</td>
                     <td>admin</td>
                     <td>
-                        <button id="btn-admin-chat" class="btn btn-lg btn-success"  type="button">Chat</button>
+                        <a href="#open-block" class="link-open-block">Chat</a>
+                        {#<button id="btn-admin-chat" class="btn btn-lg link-open-block"  type="button">Chat</button>#}
                     </td>
                 </tr>
                 </tbody>
@@ -56,12 +57,62 @@
         </div>
 
     </div>
+<div id="open-block" class="wrap">
+    <div class="open-block-inner">
+        <div class="open-block-text">
+            <div class="container">
+                <div class="col">
+                    <h3>Message:</h3>
+                    <!-- Вывод всех сообщений будет здесь -->
+                    <div id="all_mess_adm"></div>
+                </div>
+                <div class="col">
+                    <form id="messFormAdm">
+                        <div class="form-group">
+                            <input id="inp_adm" type="text" class="form-control input-lg" placeholder="Message..." />
+                        </div>
+                        <div class="form-group">
+                            <button id="btn_adm" class="btn btn-lg btn-success" type="submit" >Send!</button>
+                        </div>
+                    </form>
+                </div>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+                <script>
+                    $(function() {
+                        let socket = io("http://localhost:3034");
 
-<div id="myPopup" class="wrap">
-    <div class="popup">
-        <p>We are here!</p>
-        <i class="fa fa-times" aria-hidden="true"></i>
+                        let $form_adm = $("#messFormAdm");
+                        let $inp_adm = $("#inp_adm");
+                        let $all_messages_adm = $("#all_mess_adm");
+                        let $user_name_adm = "{{ app.user.username}}";
+
+                        $form_adm.submit(function(event){
+                            event.preventDefault();
+                            socket.emit('send mess',{mess:$inp_adm.val(), user:$user_name_adm});
+                            $inp_adm.val('');
+                        });
+
+
+                        socket.on('add mess', function (msg) {
+                            console.log($user_name_adm);
+                            console.log(msg.user+"chat-admin!");
+                            $all_messages_adm.append( msg.user + ":" + msg.mess + "<br>");
+
+                        });
+                        socket.emit('add mess', 'Hello World from client!!!!');
+                        socket.emit('new user',$user_name_adm);
+                    });
+                </script>
+            </div>
+            <a href="#" class="open-block-close" title="close">x</a>
+        </div>
     </div>
 </div>
+
+
+
+
+
 
 {% endblock %}

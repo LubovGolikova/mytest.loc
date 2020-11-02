@@ -140,33 +140,3 @@ body {
     border-left: none;
 }
 
-/*////////////-popup-///////*/
-.wrap{
-    visibility: hidden;
-    position: fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
-    display: flex;
-    align-items:center;
-    justify-content: center;
-}
-.popup{
-    display: flex;
-    flex-direction: column;
-    width: 350px;
-    height: 350px;
-    border:1px #333 solid;
-    align-items: center;
-    justify-content: center;
-}
-.popup .fa-times{
-    /*position: absolute;*/
-    right: 10px;
-    top: 10px;
-    cursor: pointer;
-}
-.wrap.show{
-    visibility: visible;
-}
